@@ -1,0 +1,103 @@
+<html ng-app="groups">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+<style>
+  body{
+	font-family: 'Exo 2', sans-serif;
+}
+@import url(http://fonts.googleapis.com/css?family=Exo+2);
+
+body{
+	font-family: 'Exo 2', sans-serif;
+}
+.welcomeText{
+  text-align:center;
+}
+.heading{ 
+  font-size:21px;
+  font-weight:bold;
+}
+.headingInfo{
+  font-weight:lighter;
+}
+.font21{
+  font-size:21px;
+}
+
+  </style>
+  
+<script src="angularjs/addmemcontroller.js"></script> 
+</head>
+<body>
+<div ng-controller="addmemtogroupcontroller">
+  <div class="navbar navbar-inverse navbar-static-top" style="background-color:#3B5999">
+    <div class="container">
+      <div class="navbar-header">
+       <a class="navbar-brand" style="font-color:white">Facebook</a>
+       
+        <button class="navbar-toggle" data-toggle="collapse" data-target="#navigationMenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+      </div>
+        <div class="collapse navbar-collapse" id="navigationMenu">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a>Admin :You</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+  <div class="container">
+      <div class="jumbotron">
+        <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-center">
+          <div class="panel panel-default">
+          	<div class="panel-body">
+            	<img src="http://www.udel.edu/chem/dawatson/images/group/DAW_group_2012_11.jpg" class="img-thumbnail" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h1> Group name: <%= grpname %></h1>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="container" >
+		
+  
+  
+  <div class="container">
+  	<h3> Add friends to the group </h3>
+  	<% if(farr){%>
+         <% for(var i=0;i< farr.length;i++){%>
+		<li><a><%=farr[i]%> &nbsp;&nbsp;<button type="button" class="btn btn-default" id="<%=farr[i]%>" ng-click="add($event);">ADD</button></a>
+		</li>
+		
+	<%}%>
+	<%}%>      
+    </div>
+    
+    <button type="button" class="btn btn-default"  ng-click="show();">Show Members</button>
+    <li ng-repeat="i in mem"> 
+    {{i}}
+    <button type="button" class="btn btn-default" id="{{i}}" ng-click="delet($event);" ng-hide="flag">Delete</button></a>
+    
+    <li>
+  </div>
+ </div> 
+</body>
+</html>

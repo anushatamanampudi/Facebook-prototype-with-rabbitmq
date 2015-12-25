@@ -1,0 +1,209 @@
+<html ng-app="profile">
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.wallform.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+
+*{margin:0px;padding:0px}
+body{font-family: Arial, Helvetica, sans-serif;background-color: #e9eaed;color: #333333;}
+#container{margin:0 auto;width:900px}
+#timelineContainer{width:100%;position:relative}
+#timelineBackground {
+height: 315px;
+position: relative;
+border-left: 1px solid #333333;
+border-right: 1px solid #333333;
+margin-top: -20px;
+overflow: hidden;
+background-color:#ffffff;
+}
+#timelineProfilePic {
+width: 170px;
+height: 170px;
+border: 1px solid #666666;
+background-color: #ffffff;
+position: absolute;
+margin-top: -145px;
+margin-left: 20px;
+z-index: 1000;
+overflow: hidden;
+}
+#timelineTitle {
+color: #ffffff;
+font-size: 24px;
+margin-top: -45px;
+position: absolute;
+margin-left: 206px;
+font-weight: bold;
+text-rendering: optimizelegibility;
+text-shadow: 0 0 3px rgba(0,0,0,.8);
+z-index: 999;
+text-transform: capitalize;
+}
+#timelineShade {
+min-height: 95px;
+position: absolute;
+margin-top: -95px;
+width: 100%;
+background:url(images/timeline_shade.png);
+}
+.timelineUploadBG {
+position: absolute;
+margin-top: 50px;
+margin-left: 813px;
+height: 32px;
+width: 32px;
+}
+#timelineNav {
+border: 1px solid #d6d7da;
+background-color: #ffffff;
+min-height: 43px;
+margin-bottom: 10px;
+position: relative;
+}
+
+.leftBox {
+    position: relative;
+    width: 320px;
+    padding: 1px;
+    margin-right: 10px;
+    min-height: 150px;
+    float: left;
+    background: #fff;
+    margin-bottom: 15px;
+}
+
+
+
+
+body {
+  background-color: #eaeaea;
+}
+
+
+
+
+</style>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/angularjs/friendcontroller.js"></script>
+</head>
+<body>
+
+  
+<div id="container" ng-controller="profilecontroller" data-ng-init="btname=<%= fname %>;checkfrnd(btname);">
+
+<div id="timelineContainer">
+<!-- timeline background -->
+<div id="timelineBackground">
+<img src="/images/635076845926809778.jpg" class="bgImage" style="margin-top: -10px;width="5200" height="340" alt="Computer Hope">
+</div>
+
+<!-- timeline background -->
+<div id="timelineShade">
+</div>
+
+
+<!-- timeline profile picture -->
+<div id="timelineProfilePic">
+<img src="data:image/jpeg;base64,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" class="bgImage" style="margin-top: -10px; margin-right:10px"></div>
+
+</div>
+
+<!-- timeline title -->
+<div id="timelineTitle"><%= fname %> 's PAGE!</div>
+
+<!-- timeline nav -->
+<div id="timelineNav">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+   
+      
+              <div class="row" style="padding-top:30px">
+               
+                <div class="col-md-6">
+                  <div class="activity-mini">
+                    <i class="glyphicon glyphicon-comment text-muted"></i> 500
+                  </div>
+                  <div class="activity-mini">
+                    <i class="glyphicon glyphicon-thumbs-up text-muted"></i> 1500
+                  </div>
+                </div>
+              </div>
+           
+                </div>
+      </div>
+      </div>
+      </div>
+       <div class="row" style="padding-top:30px" >
+               
+                        
+                        <div class="row" style="padding-top:30px" style:"padding-left="30px">
+               
+                       <div class="col-md-6">
+                       <!--  
+                        <table class="table-striped table-bordered" >
+                       <th>Friends List</th>
+                       <% if(farr){%>
+		          <% for(var i=0;i< farr.length;i++){%>
+		         
+	<tr><td><%=farr[i]%><td><tr>
+		
+	<%}%>
+	<%}%> 
+	</table> -->
+	<h1> Friends List</h1>
+	<% if(farr){%>
+	  <ul>
+		          <% for(var i=0;i< farr.length;i++){%>
+		           
+          <li><a href="#"><img src="https://lh3.googleusercontent.com/eZx0HHnsGjpr3PAeOQCiiXr1hPlgdObxtyDYBoLGxpSgVCEA3rTG9geRWeFRnkA__Ov-Gw=s85" width="22" height="22"> <%=farr[i]%></a></li>
+         <%}%>
+	
+      </ul>  
+        <%}%>             
+                        </div>
+      			     
+      			         <p><button class="btn btn-primary add-friend" id="<%= fname %>" data-ng-attr-name="btname" ng-click="addfriend($event);">{{add}}</button></p>
+                        <div class="col-md-6">
+                         <table class="table-striped table-bordered">
+                        <th colspan=2>groups List</th>
+                        <% if(grp){%>
+		<% for(var i=0;i< grp.length;i++){%>
+		<tr><td><%=grp[i]%><td><tr>
+		
+	<%}%>
+	<%}%>
+    </table>                  
+                        </div>
+                        
+                        
+      			
+      			
+      			
+    
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
+
+

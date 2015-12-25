@@ -1,0 +1,310 @@
+<html ng-app="about">
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+	border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+}
+
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+    color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+	color: #fff;
+	background-color: #3071a9;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+	color: #428bca;
+	background-color: #fff;
+	border-color: #428bca;
+	border-bottom-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
+    background-color: #428bca;
+    border-color: #3071a9;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: #fff;   
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: #3071a9;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    background-color: #4a9fe9;
+}
+</style>
+
+<!--  </script>
+    <script type="text/javascript">
+        //Defining a Angular module
+        var myApp = angular.module('about', []);
+
+        //Defining a Angular Controller
+        myApp.controller('editcontroller', ['$scope', '$http', function ($scope, $http) {
+
+            
+            //Displaying the Save button
+            $scope.DisplaySave = true;
+            //Hiding the Update button
+            $scope.DisplayUpdate = false;
+
+            function GetPersons() {
+                //Defining the $http service for getting the people
+                $http({
+                    method: 'GET',
+                    url: '/about'
+                }).
+                success(function (data) {
+                    if (data != null || data != 'undefined') {
+                       //Assigning people data to the $scope variable
+                        $scope.persons = data;
+                        //Clearing the Person object in create context and Showing default Gender(Male) Checked
+                       $scope.newperson = {
+                           Id: '',
+                           Gender: 'true'
+                       };
+                   }
+                })
+                .error(function (error) {
+                    //Showing error message
+                    $scope.status = 'Unable to retrieve people' + error.message;
+                });
+            }
+          
+            //Create a new person
+            $scope.createPerson = function () {
+                //Defining $http service for creating a person
+                $http({
+                    method: 'POST',
+                    url: '/api/persons',
+                    data: JSON.stringify($scope.newperson),
+                    headers: { 'Content-Type': 'application/JSON' }
+                }).
+                success(function (data) {
+                    //Showing Success message
+                    $scope.status = "The Person Saved Successfully!!!";
+                    //Loading people to the $scope
+                    GetPersons();
+                })
+                .error(function (error) {
+                    //Showing error message
+                    $scope.status = 'Unable to create a person: ' + error.message;
+                });
+            }
+
+            //Edit a person
+            $scope.editPerson = function (pId) {
+                for (i in $scope.persons) {
+                    //Getting the person details from scope based on id
+                    if ($scope.persons[i].Id == pId) {
+                        //Assigning the Create user scope variable for editing
+                        $scope.newperson = {
+                            Id: $scope.persons[i].Id,
+                            Name: $scope.persons[i].Name,
+                            Age: $scope.persons[i].Age,
+                            Gender: JSON.stringify($scope.persons[i].Gender)
+                        };
+                        //Hiding Save button
+                        $scope.DisplaySave = false;
+                        //Displaying Update button
+                        $scope.DisplayUpdate = true;
+                        //Clearing the Status
+                        $scope.status = '';
+                    }
+                }
+            }
+
+            //Update a person
+            $scope.updatePerson = function () {
+                //Defining $http service for updating a person
+                $http({
+                    method: 'PUT',
+                    url: '/api/persons',
+                    data: JSON.stringify($scope.newperson),
+                    headers: { 'Content-Type': 'application/JSON' }
+                }).
+                success(function (data) {
+                    //Showing Success message
+                    $scope.status = "The Person Updated Successfully!!!";
+                    //Loading people to the $scope
+                    GetPersons();
+                    //Displaying save button
+                    $scope.DisplaySave = true;
+                    //Hiding Update button
+                    $scope.DisplayUpdate = false;
+                })
+                .error(function (error) {
+                    //Showing error message
+                    $scope.status = 'Unable to update a person: ' + error.message;
+                });
+            }
+
+            //Delete a person
+            $scope.deletePerson = function (pId) {
+                //Defining $http service for deleting a person
+                $http({
+                    method: 'DELETE',
+                    url: '/api/persons/' + pId
+                }).
+                success(function (data) {
+                    //Showing Success message
+                    $scope.status = "The Person Deleted Successfully!!!";
+                    //Loading people to the $scope
+                    GetPersons();
+                })
+                .error(function (error) {
+                    //Showing error message
+                    $scope.status = 'Unable to delete a person: ' + error.message;
+                });
+            }
+
+        }]);
+
+    </script> -->
+</head>
+<body>
+<div class="container" ng-controller="editcontroller">
+    <div class="page-header">
+        <h1>About</h1>
+    </div>
+    <div class="row">
+    	
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Overview</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">work and Education</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab">contact and basic info</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab">Life Events</a></li>
+                        </ul>
+                </div>
+                <div class="panel-body" style="padding:100px">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1primary">
+                        
+                        <div>
+         
+                        <div class="tab-pane fade" id="tab2primary"  display:"none">
+                        
+         <!--                 <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].work%></li>
+		
+	<%}%>
+	<%}%>
+      
+      			
+      			
+    
+                 
+                
+                        <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].education%></li>
+		
+	<%}%>
+	<%}%> -->
+      
+      			
+      	 <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].lifevents%></li>
+		
+	<%}%>		
+    <%}%>
+              
+            
+            
+    
+                        <div class="tab-pane fade" id="tab3primary">
+                        <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].lifevents%></li>
+		
+	<%}%>
+	<%}%>
+      
+      			
+      			
+    
+               
+                 
+                 
+        
+                        <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].aboutme%></li>
+		
+	<%}%>
+	<%}%> 
+      
+      			
+      			
+    
+                    
+                 
+                 
+                 </div>
+                        <div class="tab-pane fade" id="tab4primary">
+                        <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].lifeevents%></li>
+		
+	<%}%>
+	<%}%>
+      
+      			
+      			
+    
+                 
+                        <% if(re){%>
+		<% for(var i=0;i< re.length;i++){%>
+		<li><%=re[i].interests%></li>
+		
+	<%}%>
+	<%}%>
+      
+      			
+      			
+    
+                    
+                 
+                 
+                 
+                 
+                  </div>
+                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+</body>                    
+</html>

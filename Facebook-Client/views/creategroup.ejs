@@ -1,0 +1,67 @@
+<html ng-app="grp">
+
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script src="angularjs/grpdeletecontroller.js"></script> 
+<div class="row" ng-controller="deletegroup">
+    <div class="col-md-12 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <i class="icon-calendar"></i>
+          <h3 class="panel-title">Give details here</h3>
+        </div>
+        </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+          <form method="post" action="/groupcreation">
+            <div class="col-lg-6 col-sm-6 col-sx-6">
+             <h>Enter group name below to add group</h>
+              <input type="text"   name="input1">
+           <input type="submit" value="add group" /></a>
+           </div>
+           </form>
+                          
+              <div class="panel-body">
+          <div class="row">
+         <form method="post" action="/groupdeletion">
+            <div class="col-lg-6 col-sm-6 col-sx-6">
+             <h>Get the list of groups you are admin for by clicking below</h><br><br><br>
+             <button type="button" class="btn btn-default"  ng-click="showgrps();"> Show groups list</button><br><br>
+             <h>You can click on the delete button next to the group in order to delete the group</h><br>
+             <li ng-repeat="i in grp"> 
+             {{i}}
+            <button type="button" class="btn btn-default" id="{{i}}" ng-click="del($event);" ng-hide="flag">Delete</button></a>
+           
+           </div>
+           </form>
+                
+             
+            </div>
+            </div>
+            </div>
+          <!--     <div class="panel-body">
+           <div class="row">
+            <div class="col-lg-6 col-sm-6 col-sx-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" title="">Add Members!</button>
+                </span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            </div>
+            -->
+             </div>
+            </div>
+       </html>
+       
+ </body>

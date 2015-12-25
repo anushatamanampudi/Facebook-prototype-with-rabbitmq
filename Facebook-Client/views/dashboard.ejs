@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboardapp">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Facebook </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="stylesheets/style1.css" rel="stylesheet">
+		</style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="angularjs/dashboardcontroller.js"></script> 
+	</head>
+	<body>
+<div class="wrapper" ng-controller="dashboardcontroller">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+                      
+          
+                
+                <!-- top nav -->
+              	<div class="navbar navbar-blue navbar-static-top" style="height: 15px">  
+                    <div class="navbar-header">
+                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+          				<span class="icon-bar"></span>
+          				<span class="icon-bar"></span>
+                      </button>
+                      <a href="/" class="navbar-brand logo" style="height: 25px">f</a>
+                  	</div>
+                  	<nav class="collapse navbar-collapse" role="navigation">
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group input-group-sm" style="max-width:500px;">
+                          <input type="text" class="form-control" placeholder="Search" ng-model="srchterm" id="srchterm">
+                          <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav">
+                      <li>
+                        <a href="/profile"><i class="glyphicon glyphicon-home"></i> Home</a>
+                      </li>
+                      <li>
+                        <a ng-href="/logout"><i class="glyphicon glyphicon-user" ></i> logout </a>
+                      </li>
+                      <li>
+                        <a ng-href="/creategroup"><i class="glyphicon glyphicon-user" ></i> create/show/delete groups </a>
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicons-vcard" data-toggle="dropdown"></i>friend requests</a>
+                       <% if(frndarr){%>
+		<ul class="dropdown-menu">
+		<% for(var i=0;i< frndarr.length;i++){%>
+		<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=frndarr[i]%> &nbsp;&nbsp;<button type="button" class="btn btn-default" id="<%=frndarr[i]%>" ng-click="accept($event);">Accept</button></a></li>
+		
+	<%}%>
+	<%}%>
+	
+	</ul>
+<!--  <ul class="dropdown-menu">
+                       <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">For accepting <button type="button" class="btn btn-default">Accept</button> <button type="button" class="btn btn-default">Reject</button></a></li>
+     
+                      </ul>
+                      
+                      
+                      </li>
+                    </ul> -->
+               
+                  	</nav>
+                </div>
+                <!-- /top nav -->
+              
+                <div>
+                    <div class="full col-sm-9">
+                      
+                        <!-- content -->                      
+                      	<div class="row">
+                          
+                         <!-- main col left --> 
+                                  <div>
+                                   <h4> <center> Welcome <%= fname + " " + lname %>!</center> </h4>
+                                   </div>
+                       <center> <div class="well" style="width:760px"> 
+                                   <form class="form-horizontal" role="form" style="width:760px">
+                                   
+                                    <h4>What's New</h4>
+                                     <div class="form-group" style="width:600px;padding-left:10px;padding-right:40px">
+                                      <textarea class="form-control" placeholder="Update your status" ng-model="text"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary " type="button" ng-click="post();">Post</button><ul class="list-inline"><li><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                                  </form>
+                              </div></center>
+                              
+                            
+                              
+                              
+                              
+                              
+                            <center>
+                               <% if(flist){%>
+                           <table class="table table-striped table-bordered table-hover">
+                           <tr><th colspan=2>&nbsp;&nbsp;&nbsp;News Feed</th></tr>
+                           <tr><th>&nbsp;&nbsp;&nbsp; Posted By: </th><th>Post:</th></tr>
+                           <% for(var i=0;i< flist.length;i++){%>
+		                    <tr><td>&nbsp;&nbsp;&nbsp;<%=flist[i].firstname%></td>
+		                   <td><%=flist[i].post%></td></tr>
+	                        <%}%>
+	                         <%}%>  
+	                         </table> 
+                       </center>  
+                              </div>
+                              </div>
+                              </div>
+                           
+                           
+                              
+</body>
+</html>

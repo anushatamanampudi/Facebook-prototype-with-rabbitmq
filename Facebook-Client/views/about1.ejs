@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <link href="stylesheets/styles.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="navbar navbar-blue navbar-static-top" style="height: 15px">
+  </div>
+  
+  <div id="w">
+    <div id="content" class="clearfix">
+      <div id="userphoto"><img src="images/avatar.png" alt="default avatar"></div>
+      <h1>About page</h1>
+      <nav id="profiletabs">
+        <ul class="clearfix">
+          <li><a href="#lifeevents" class="sel">lifeevents</a></li>
+          <li><a href="#workandeducation">workandeducation</a></li>
+          <li><a href="#contactinfo">contactinfo</a></li>
+          <li><a href="#interests">interests</a></li>
+          <li><a href="#settings">User overview</a></li>
+        </ul>
+      </nav>
+      
+      <section id="lifeevents">
+      <br></br>
+      <% if(lifeevents){%>
+		<% for(var i=0;i< lifeevents.length;i++){%>
+		<li><%=lifeevents[i]%></li>
+         <%}%>
+	    <%}%>  
+      </section>
+      
+      <section id="workandeducation" class="hidden">
+      <br></br>
+      <% if(wande){%>
+		<% for(var i=0;i< wande.length;i++){%>
+		           
+         <li><%=wande[i]%></li>
+         <%}%>
+	<%}%>  
+        
+        
+      </section>
+      
+      <section id="contactinfo" class="hidden">
+      <br></br>
+      
+        <p>contactinfo list:</p>
+        <% if(contact){%>
+		<% for(var i=0;i< contact.length;i++){%>
+		           
+         <li><%=contact[i]%></li>
+         <%}%>
+	<%}%>
+        
+      </section>
+      <section id="interests" class="hidden">
+      <br></br>
+        <p>interests list:</p>
+       <% if(interest){%>
+		<% for(var i=0;i< interest.length;i++){%>
+		           
+         <li><%=interest[i]%></li>
+         <%}%>
+	<%}%> 
+       
+      </section>
+      
+      <section id="settings" class="hidden">
+      <p>   .       </p>
+      
+        <p>
+        <span>Edit your details:</span>
+        </p>
+        <div>
+        <p class="setting">
+        <span>life events<img src="images/edit.png" class="close"></span> 
+        <form method="post" action="/delevents">
+        <% if(lifeevents){%>
+		<% for(var i=0;i< lifeevents.length;i++){%>
+		<li><%=lifeevents[i]%>
+		<input type="submit" name="<%=lifeevents[i]%>" value="delete"></li>
+         <%}%>
+	    <%}%>
+	     </form>
+        </p>
+        <div id="main" style="display:none;">
+        <div>
+          <h3>Edit events</h3>
+          <form method="post" action="/addevents">
+          <label for="usrnm" class="ui-hidden-accessible">Event Name:</label>
+          <input type="text" name="user" id="usrnm">
+          <input type="submit" data-inline="true" value="Add">
+          </form>
+        </div>
+        </div>
+        </div>
+        <div>
+        <p class="setting">
+        <span>work and education<img src="images/edit.png" class="close1"></span>
+        <form method="post" action="/delwande">
+        <% if(wande){%>
+		<% for(var i=0;i< wande.length;i++){%>
+		           
+         <li><%=wande[i]%><input type="submit" name="<%=wande[i]%>" value="delete"></li>
+         <%}%>
+	<%}%>
+	</form> 
+        <div id="main1" style="display:none;">
+        <div>
+        
+          <h3>Edit work or education</h3>
+            <form method="post" action="/addwande">
+          <label for="usrnm" class="ui-hidden-accessible">work or education Name:</label>
+          <input type="text" name="user" id="usrnm">
+          <input type="submit" data-inline="true" value="Add">
+          </form>
+        </div>
+        </div>
+        </div>
+        <div>
+        <p> . </p>
+        <p class="setting">
+        <span>contact info<img src="images/edit.png" class="close2"></span>
+        <form method="post" action="/delcontacts">
+        <% if(contact){%>
+		<% for(var i=0;i< contact.length;i++){%>
+		           
+         <li><%=contact[i]%><input type="submit" name="<%=contact[i]%>" value="delete"></li>
+         <%}%>
+	<%}%>
+	</form>
+        <div id="main2" style="display:none;">
+        <div>
+          <h3>Edit contacts</h3>
+           <form method="post" action="/addcontacts">
+          <label for="usrnm" class="ui-hidden-accessible"> contact:</label>
+          <input type="text" name="user" id="usrnm">
+          <input type="submit" data-inline="true" value="Add">
+          </form>
+        </div>
+        </div>
+        </div>
+        <div>
+        <p> . </p>
+        <p class="setting">
+        <span>Interests<img src="images/edit.png" class="close3"></span>
+         <form method="post" action="/delinterests">
+        <% if(interest){%>
+		<% for(var i=0;i< interest.length;i++){%>
+		           
+         <li><%=interest[i]%> <input type="submit" name="<%=interest[i]%>" value="delete"></li>
+         <%}%>
+	<%}%>
+	</form>
+        <div id="main3" style="display:none;">
+        <div>
+          <h3>Edit interests</h3>
+            <form method="post" action="/addinterests">
+          <label for="usrnm" class="ui-hidden-accessible">interest:</label>
+          <input type="text" name="user" id="usrnm">
+          <input type="submit" data-inline="true" value="Add">
+          </form>
+        </div>
+        </div>
+        </div>
+      </section>
+      
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+    
+        $('.close').click(function(){
+            $('#main').show();
+        });
+        $('.close1').click(function(){
+            $('#main1').show();
+        });
+        $('.close2').click(function(){
+            $('#main2').show();
+        });
+        $('.close3').click(function(){
+            $('#main3').show();
+        });
+
+  });
+});
+</script>
+</body>
+</html>
